@@ -12,6 +12,7 @@ target_link_libraries(tests PRIVATE Boost::ut Symbol)
 target_sources(tests PRIVATE
         test_visitor.cpp
         test_evaluator.cpp
+        test_symbol_table.cpp
 )
 
 add_test(NAME tests COMMAND tests)

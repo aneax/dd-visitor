@@ -13,14 +13,15 @@ concept IsSymbol = std::is_base_of<Symbol, SymbolImpl>::value
 class SymbolTable
 {
   private:
-    std::unordered_map<std::string, std::shared_ptr<Symbol>> table_;
+    using Map = std::unordered_map<std::string, std::shared_ptr<Symbol>>;
+    Map table_;
 
   public:
     template <typename SymbolImpl>
     requires IsSymbol<SymbolImpl>
-    void insert(SymbolImpl&& symbol)
+    void insert(std::shared_ptr<SymbolImpl>&& symbol)
     {
-      table_.insert({symbol.identifier(), symbol});
+      table_.insert_or_assign(symbol->identifier(), symbol);
     }
 
     auto lookup(const std::string& identifier) const noexcept
@@ -33,6 +34,17 @@ class SymbolTable
 
       return it->second;
     }
+
+    auto begin() noexcept -> Map::iterator { return table_.begin(); }
+
+    auto end() noexcept -> Map::iterator { return table_.end(); }
+
+    auto begin() const noexcept -> Map::const_iterator
+    {
+      return table_.cbegin();
+    }
+
+    auto end() const noexcept -> Map::const_iterator { return table_.cend(); }
 };
 
 #endif
