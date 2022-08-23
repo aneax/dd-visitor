@@ -6,13 +6,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(ut)
 
-add_executable(tests test_main.cpp)
-target_link_libraries(tests PRIVATE Boost::ut Symbol)
+add_subdirectory(visitors)
+add_subdirectory(symbol)
 
-target_sources(tests PRIVATE
-        test_visitor.cpp
-        test_evaluator.cpp
-        test_symbol_table.cpp
-)
 
-add_test(NAME tests COMMAND tests)
+

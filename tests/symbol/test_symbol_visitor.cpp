@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 
-extern void visitor_test()
+extern void symbol_visitor_test()
 {
   using namespace boost::ut;
   //NOLINTBEGIN(readability-magic-numbers)

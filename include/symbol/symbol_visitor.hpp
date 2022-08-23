@@ -14,4 +14,9 @@ struct SymbolVisitor
     using Visitor<Symbol, IntSymbol, FloatSymbol, StringSymbol>::visit;
 };
 
+namespace visitor::v2
+{
+using SymbolVisitor = Visitor<Symbol, IntSymbol, FloatSymbol, StringSymbol>;
+}   //namespace visitor::v2
+
 #endif

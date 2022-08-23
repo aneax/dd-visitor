@@ -14,10 +14,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        cxx: [g++, clang++]
+        cxx: [g++-11, clang++-13]
         sanitizer: [address, undefined]
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     env:
       CXX: ${{ matrix.cxx }}

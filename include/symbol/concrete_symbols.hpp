@@ -11,10 +11,7 @@ template <class T>
 class VisitableSymbol : public Symbol
 {
   public:
-    template <typename... Args>
-    VisitableSymbol(Args&&... args) : Symbol(std::forward<Args>(args)...)
-    {
-    }
+    using Symbol::Symbol;
 
     void accept(SymbolVisitor& visitor) override
     {
