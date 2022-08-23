@@ -18,8 +18,8 @@ RUN apt-get install -y clang-15 clang-tools-15 lldb-15 clang-format-15 python3-c
 
 RUN apt-get update && apt-get autoclean && apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ENV CC=/usr/bin/clang-14 \
-    CXX=/usr/bin/clang++-14
+ENV CC=/usr/bin/clang-15 \
+    CXX=/usr/bin/clang++-15
 
 # These commands copy your files into the specified directory in the image
 # and set that as the working location
@@ -27,14 +27,13 @@ COPY . /usr/src/docker_test
 WORKDIR /usr/src/docker_test
 
 # # This command compiles your app using GCC, adjust for your source code
-# RUN mkdir build && cd build
+RUN mkdir build
 
-# RUN cmake .. -DCMAKE_BUILD_TYPE=Release -g make
+WORKDIR /usr/src/docker_test/build
 
-# RUN make -j
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release -G "Unix Makefiles"
 
-# CMD ["/usr/src/docker_test/build/tests/tests"]
+RUN make -j
 
-# # This command runs your application, comment out this line to compile only
-# CMD ["./dr"]
+CMD ["/usr/src/docker_test/build/tests/tests"]
 
