@@ -4,3 +4,5 @@
 **/.vscode
 **/build
 **/.devcontainer
+**/.clang-tidy.yml
+**/.clang-format.yml
